@@ -19,7 +19,6 @@ async function getData() {
     });
     carousel.innerHTML = datahtml;
 
-    // Sau khi tải xong dữ liệu, chọn tất cả các phần tử `.item`
     const items = document.querySelectorAll('.item');
     console.log(items.length);
     let currentIndex = 0;
@@ -76,20 +75,26 @@ async function getData() {
       if (!isDragging) return;
       e.preventDefault();
       currentX = e.touches[0].pageX - startX;
-      if (currentX > 0) {
+      if (currentX > 50) { // Điều chỉnh độ nhạy
         nextItem();
-      } else {
+        isDragging = false;
+      } else if (currentX < -50) { // Điều chỉnh độ nhạy
         prevItem();
+        isDragging = false;
       }
     });
 
     // Sự kiện cho hành động lăn chuột trên máy tính
+    let debounceTimeout;
     carousel.addEventListener('wheel', (e) => {
-      if (e.deltaY > 0) {
-        nextItem();
-      } else {
-        prevItem();
-      }
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => {
+        if (e.deltaY > 0) {
+          nextItem();
+        } else {
+          prevItem();
+        }
+      }, 100); // Điều chỉnh thời gian trễ
     });
 
   } catch (error) {
