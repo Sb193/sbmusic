@@ -214,7 +214,7 @@
 /* Hiển thị menu-bar khi ở màn hình rộng */
 @media (min-width: 768px) {
   .menu-bar .list-button, .start-button {
-      display: block;
+      display: flex;
   }
   .menu-button {
       display: none;
