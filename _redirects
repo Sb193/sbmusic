@@ -1,4 +1,4 @@
-/*    /public/index   200
+/*    /public/:splat 200
 /*    /public/404    404
 /index    /public/index.html    200
 /assets/* /public/assets/:splat 200
