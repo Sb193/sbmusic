@@ -206,3 +206,61 @@
     color: #0073e6;
   }
 
+  /* Ẩn menu-bar trên mobile */
+.menu-bar .list-button, .start-button {
+  display: none;
+}
+
+/* Hiển thị menu-bar khi ở màn hình rộng */
+@media (min-width: 768px) {
+  .menu-bar .list-button, .start-button {
+      display: block;
+  }
+  .menu-button {
+      display: none;
+  }
+}
+
+/* Canvas menu cho mobile */
+.canvas-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Ẩn menu */
+  width: 80%;
+  height: 100%;
+  background: #fff;
+  transition: right 0.3s ease;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+/* Hiển thị canvas khi active */
+.canvas-menu.active {
+  right: 0;
+}
+
+/* Định dạng ul bên trong canvas menu */
+.canvas-menu-list {
+  padding: 20px;
+  list-style: none;
+}
+.canvas-menu-list li {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+/* Ẩn các thành phần trên màn hình nhỏ */
+.search-bar, .menu-button {
+  display: flex;
+  align-items: center;
+}
+
+.menu-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
