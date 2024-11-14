@@ -236,7 +236,7 @@
 }
 
 /* Hiển thị canvas khi active */
-.canvas-menu.active {
+.canvas-menu .active {
   right: 0;
 }
 
