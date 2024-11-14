@@ -2,14 +2,14 @@ let carousel = document.getElementById("carousel");
 
 async function getData() {
   try {
-    const response = await fetch('./assets/data/data.json');
+    const response = await fetch('https://sbmusic.pages.dev/public/assets/data/data.json');
     const data = await response.json();
 
     let datahtml = "";
     let selected = "selected";
     data.forEach(item => {
       datahtml += `<div class="card item ${selected}">
-                      <img src="./public/assets/imgs/${item.avatar}" alt="Image 7" width="100%"/>
+                      <img src="https://sbmusic.pages.dev/public/assets/imgs/${item.avatar}" alt="Image 7" width="100%"/>
                       <div class="card-content roboto-regular ">
                           <h3 class="name roboto-bold">${item.name}</h3>
                           <h4 class="level">${item.education}</h4>
