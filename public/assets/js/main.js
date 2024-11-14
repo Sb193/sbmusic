@@ -75,10 +75,10 @@ async function getData() {
       if (!isDragging) return;
       e.preventDefault();
       currentX = e.touches[0].pageX - startX;
-      if (currentX > 50) { // Điều chỉnh độ nhạy
+      if (currentX > 500) { // Điều chỉnh độ nhạy
         nextItem();
         isDragging = false;
-      } else if (currentX < -50) { // Điều chỉnh độ nhạy
+      } else if (currentX < -500) { // Điều chỉnh độ nhạy
         prevItem();
         isDragging = false;
       }
@@ -90,9 +90,10 @@ async function getData() {
       clearTimeout(debounceTimeout);
       debounceTimeout = setTimeout(() => {
         if (e.deltaY > 0) {
-          nextItem();
-        } else {
           prevItem();
+        } else {
+          
+          nextItem();
         }
       }, 100); // Điều chỉnh thời gian trễ
     });
