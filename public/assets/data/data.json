@@ -1,0 +1,37 @@
+[
+    {
+        "avatar": "1.jpg",
+        "name": "Nguyễn Văn A",
+        "education": "education"
+    },
+    {
+        "avatar": "2.jpg",
+        "name": "Nguyễn Văn B",
+        "education": "education"
+    },
+    {
+        "avatar": "3.jpg",
+        "name": "Nguyễn Văn C",
+        "education": "education"
+    },
+    {
+        "avatar": "4.jpg",
+        "name": "Nguyễn Văn D",
+        "education": "education"
+    },
+    {
+        "avatar": "5.jpg",
+        "name": "Nguyễn Văn E",
+        "education": "education"
+    },
+    {
+        "avatar": "6.jpg",
+        "name": "Nguyễn Văn F",
+        "education": "education"
+    },
+    {
+        "avatar": "7.jpg",
+        "name": "Nguyễn Văn G",
+        "education": "education"
+    }
+]

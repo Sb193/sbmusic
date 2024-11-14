@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload and Play Music</title>
+</head>
+<body>
+  <h1>Upload and Play Music</h1>
+  
+  <!-- Form Upload Music -->
+  <h2>Upload Music</h2>
+  <form id="upload-form">
+    <label for="song-name">Song Name:</label>
+    <input type="text" id="song-name" name="song_name" required>
+    <br><br>
+    <label for="file-input">Select Music File:</label>
+    <input type="file" id="file-input" name="file" accept="audio/*" required>
+    <br><br>
+    <button type="button" onclick="uploadMusic()">Upload</button>
+  </form>
+  <p id="upload-status"></p>
+
+  <!-- Form to Get and Play Music -->
+  <h2>Get and Play Music</h2>
+  <form id="get-music-form">
+    <label for="get-song-name">Enter Song Name:</label>
+    <input type="text" id="get-song-name" required>
+    <button type="button" onclick="getMusic()">Get Music</button>
+  </form>
+  <p id="get-status"></p>
+  
+  <audio id="audio-player" controls style="display: none;"></audio>
+
+  <script>
+    const API_URL = 'http://127.0.0.1:8787/music'; // Replace with your actual Cloudflare Worker API URL
+
+    // Function to read file as base64
+    function readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    
+
+    // Function to upload music to the server
+    async function uploadMusic() {
+      const songName = document.getElementById('song-name').value;
+      const fileInput = document.getElementById('file-input').files[0];
+
+      if (!songName || !fileInput) {
+        document.getElementById('upload-status').innerText = 'Please provide a song name and select a music file.';
+        return;
+      }
+
+      try {
+        // Convert file to base64
+        const base64Data = await readFileAsBase64(fileInput);
+        
+
+        // Loop through each part and upload to server
+        
+          const partData = {
+            song_name: songName,
+            music_data: base64Data,
+            path: fileInput.name,
+          };
+
+          const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(partData),
+          });
+
+          if (!response.ok) {
+            throw new Error(`Failed to upload`);
+          }
+        
+
+        document.getElementById('upload-status').innerText = 'Music uploaded successfully!';
+      } catch (error) {
+        console.error(error);
+        document.getElementById('upload-status').innerText = 'Failed to upload music.';
+      }
+    }
+
+    // Function to get music from the server and play it
+    async function getMusic() {
+      const songName = document.getElementById('get-song-name').value;
+
+      if (!songName) {
+        document.getElementById('get-status').innerText = 'Please provide a song name.';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/${songName}`, {
+          method: 'GET',
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch music');
+        }
+
+        const data = await response.json();
+        const musicData = data.music_data; // Combined base64 data
+
+        // Convert base64 back to Blob and create URL for audio
+        const audioBlob = base64ToBlob(musicData, 'audio/mpeg');
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        // Play the music
+        const audioPlayer = document.getElementById('audio-player');
+        audioPlayer.src = audioUrl;
+        audioPlayer.style.display = 'block';
+        document.getElementById('get-status').innerText = 'Music loaded. Press play to listen!';
+      } catch (error) {
+        console.error(error);
+        document.getElementById('get-status').innerText = 'Failed to fetch music.';
+      }
+    }
+
+    // Helper function to convert base64 string to Blob
+    function base64ToBlob(base64, mimeType) {
+      const byteCharacters = atob(base64);
+      const byteArrays = [];
+      for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+        const slice = byteCharacters.slice(offset, offset + 512);
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+      return new Blob(byteArrays, { type: mimeType });
+    }
+  </script>
+</body>
+</html>

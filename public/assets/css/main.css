@@ -1,0 +1,208 @@
+.header-logo{
+    width: 80px;
+    height: 80px;
+}
+
+.search-bar{
+    display: flex;
+    align-items: center;
+    width: 40%;
+    justify-content: space-around;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 35px;
+    border-radius: 5px 10px 10px 5px;
+    background-color: #F0F9FF; 
+}
+
+.search-input {
+    flex: 1;
+    margin-left: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: transparent;
+    color: #333;
+}
+
+.search-button {
+    background-color: #106db9; 
+    border: none;
+    border-radius: 0 10px 10px 0;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button .icon {
+    width: 15px;
+    height: 15px;
+    filter: brightness(0) invert(1);
+}
+
+.menu-bar{
+    display: flex;
+    align-items: center;
+}
+
+.navbar-menu {
+    display: flex;
+    align-items: center;
+}
+
+.button-item {
+    color: #F0F9FF;
+    margin: 20px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.start-button {
+    margin-left: 20px;
+    background-color: transparent; 
+    border: 2px solid #F0F9FF;
+    color: #F0F9FF;
+    padding: 5px 20px 5px 20px;
+    border-radius: 20px; 
+    font-size: 16px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-button:hover{
+    background-color: #F0F9FF; 
+    border: 2px solid #106db9;
+    color: #106db9;
+}
+
+.select {
+    color: #106db9;
+}
+
+.button-content {
+    margin-top: 20px;
+    background-color: #106db9; 
+    border: none;
+    color: #F0F9FF;
+    padding: 5px 20px 5px 20px;
+    border-radius: 20px; 
+    font-size: 16px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-content {
+    color: #F0F9FF;
+    font-size: 40px;
+}
+
+.content-content {
+    color: #F0F9FF;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.container {
+    overflow: hidden;
+    width: 100%; /* Độ rộng khung chứa */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .carousel {
+    display: flex;
+    margin-top: 20px;
+    transition: transform 0.5s ease; /* Hiệu ứng trượt */
+  }
+
+
+  .card {
+    border-radius: 15px;
+    background-color: #F0F9FF;
+  }
+  
+  .item {
+    flex: 0 0 20%;
+    width: 20%;
+    margin: 25px;
+    height: auto;
+    opacity: 0.5; 
+    border-radius: 8px;
+    box-sizing: border-box;
+    object-fit: cover; 
+    transition: opacity 0.3s, transform 0.3s;
+    overflow: hidden;
+  }
+  
+  .item.selected {
+    opacity: 1; /* Item được chọn hiển thị rõ */
+    transform: scale(1.1); /* Phóng to nhẹ */
+  }
+
+  .level {
+    width: max-content;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    background-color: #106db9;
+    color: #F0F9FF;
+  }
+
+  .card-content{
+    padding: 15px;
+  }
+  
+
+  .menu-item {
+    position: relative;
+    padding: 10px 20px;
+  }
+  
+  /* Ẩn submenu ban đầu */
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
+    background-color: #f3f3f3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  /* Hiển thị submenu khi di chuột vào phần tử chính */
+  .menu-item:hover .submenu {
+    display: block;
+  }
+  
+  /* Tạo kiểu cho các mục trong submenu */
+  .submenu li {
+    padding: 10px;
+    white-space: nowrap;
+  }
+  
+  .submenu li a {
+    text-decoration: none;
+    color: #333;
+  }
+  .submenu li a:hover {
+    color: #0073e6;
+  }
+
