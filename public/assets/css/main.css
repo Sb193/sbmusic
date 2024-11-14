@@ -161,7 +161,7 @@
   margin-top: 10px;
   border-radius: 10px;
   font-size: 10px;
-  background-color: #106db9;
+  background-color: #00bf63;
   color: #F0F9FF;
 }
 
@@ -194,13 +194,22 @@ display: none;
 
 @media (max-width: 768px) {
 .carousel {
-    flex-direction: column;
+    margin-top: 40px;
     width: 100%;
 }
 
 .item {
-    width: 90%;
-    margin: 10px auto;
+    width: 100%;
+    margin: 5px;
+    flex: 0 0 30%;
+    width: 30%;
+    height: auto;
+    opacity: 1; 
+    border-radius: 8px;
+    box-sizing: border-box;
+    object-fit: cover; 
+    transition: none;
+    overflow: hidden;
 }
 
 .menu-bar{

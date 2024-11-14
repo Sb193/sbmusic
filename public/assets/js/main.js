@@ -19,8 +19,10 @@ async function getData() {
     });
     carousel.innerHTML = datahtml;
 
+    
+
     const items = document.querySelectorAll('.item');
-    console.log(items.length);
+    
     let currentIndex = 0;
 
     function updateCarousel() {
@@ -30,7 +32,14 @@ async function getData() {
       });
 
       items[currentIndex].classList.add('selected');
-      const offset = -20 * (currentIndex - 2); // Điều chỉnh vị trí trung tâm
+      const screenWidth = window.innerWidth;
+      let offset = 0;
+      if (screenWidth > 748){
+        offset = -20 * (currentIndex - 2); // Điều chỉnh vị trí trung tâm
+      } else {
+        offset = -30 * (currentIndex - 1); // Điều chỉnh vị trí trung tâm
+      }
+      
       document.querySelector('.carousel').style.transform = `translateX(${offset}%)`;
     }
 
@@ -52,37 +61,27 @@ async function getData() {
 
     updateCarousel();
 
+
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') nextItem();
       if (e.key === 'ArrowLeft') prevItem();
     });
 
-    let startX = 0;
-    let isDragging = false;
-    let currentX = 0;
+    
+    if (items.length > 0) {
+      // Lặp qua từng item trong NodeList và gắn sự kiện click
+      items.forEach((item, index) => {
+        item.addEventListener('click', () => {
+          currentIndex = index
+          updateCarousel()
+        });
+      });
+    } else {
+      console.error("Không tìm thấy phần tử nào với class .item.");
+    }
 
-    // Sự kiện cho hành động vuốt trên điện thoại
-    carousel.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      startX = e.touches[0].pageX - currentX;
-    });
-
-    carousel.addEventListener('touchend', () => {
-      isDragging = false;
-    });
-
-    carousel.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      currentX = e.touches[0].pageX - startX;
-      if (currentX > 500) { // Điều chỉnh độ nhạy
-        nextItem();
-        isDragging = false;
-      } else if (currentX < -500) { // Điều chỉnh độ nhạy
-        prevItem();
-        isDragging = false;
-      }
-    });
+    
 
     // Sự kiện cho hành động lăn chuột trên máy tính
     let debounceTimeout;
