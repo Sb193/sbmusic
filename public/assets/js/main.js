@@ -53,7 +53,6 @@ async function getData() {
 
     updateCarousel();
 
-    
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') nextItem();
       if (e.key === 'ArrowLeft') prevItem();
@@ -61,35 +60,36 @@ async function getData() {
 
     let startX = 0;
     let isDragging = false;
-    let currentX =0
+    let currentX = 0;
 
-    carousel.addEventListener('mousedown', (e) => {
+    // Sự kiện cho hành động vuốt trên điện thoại
+    carousel.addEventListener('touchstart', (e) => {
       isDragging = true;
-      startX = e.pageX - currentX;
-      carousel.style.cursor = 'grabbing';
+      startX = e.touches[0].pageX - currentX;
     });
 
-    carousel.addEventListener('mouseup', () => {
+    carousel.addEventListener('touchend', () => {
       isDragging = false;
-      carousel.style.cursor = 'grab';
     });
 
-    carousel.addEventListener('mousemove', (e) => {
+    carousel.addEventListener('touchmove', (e) => {
       if (!isDragging) return;
       e.preventDefault();
-      currentX = e.pageX - startX;
-      console.log(currentX)
-      if (currentX > 0){
-        nextItem()
+      currentX = e.touches[0].pageX - startX;
+      if (currentX > 0) {
+        nextItem();
       } else {
-        prevItem()
+        prevItem();
       }
-      
     });
-    
-    carousel.addEventListener('mouseleave', () => {
-      isDragging = false;
-      carousel.style.cursor = 'grab';
+
+    // Sự kiện cho hành động lăn chuột trên máy tính
+    carousel.addEventListener('wheel', (e) => {
+      if (e.deltaY > 0) {
+        nextItem();
+      } else {
+        prevItem();
+      }
     });
 
   } catch (error) {
